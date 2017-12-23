@@ -1,5 +1,5 @@
 'use strict'
-// Mejora de MacBinFile.js
+
 function Files(file) 
 {
 	if (typeof window.FileReader != "function") 
