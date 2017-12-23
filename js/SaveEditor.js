@@ -2,9 +2,8 @@ const OFFSETS = {
 	"MONEY": 0x91C,
 	"MARIO": {
 		"CURENT_LV": 0x77B, // tiny
-		"CURENT_EXP": 0x778, // tiny
-		"NEXT_EXP": 0x77C, // tiny
-		"RANK": 0x77F, // tiny 
+		"CURENT_EXP": 0x778, // short
+		"NEXT_EXP": 0x77C, // short
 		"CURENT_HP": 0x74E, // short
 		"MAX_HP": 0x752, // short
 		"CURENT_BP": 0x750, // short
@@ -17,9 +16,8 @@ const OFFSETS = {
 
 	"LUIGI" : {
 		"CURENT_LV": 0x863, // tiny
-		"CURENT_EXP": 0x860, // tiny
-		"NEXT_EXP": 0x864, // tiny
-		"RANK": 0x867, // tiny 
+		"CURENT_EXP": 0x860, // short
+		"NEXT_EXP": 0x864, // short
 		"CURENT_HP": 0x836, // short
 		"MAX_HP": 0x83A, // short
 		"CURENT_BP": 0x838, // short
