@@ -55,7 +55,7 @@ Files.prototype.readShort = function(offset)
 
 Files.prototype.readInt = function(offset)
 {
-	return this._fileReader.dataView.getUint32(a, this._littleEndian)
+	return this._fileReader.dataView.getUint32(offset, this._littleEndian)
 }
 
 Files.prototype.writeTiny = function(offset, value)
