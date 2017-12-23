@@ -30,7 +30,7 @@ function onChange(event)
 					input.required = true
 					input.setAttribute("id", id)
 
-					if(stat == "CURENT_LV" || stat == "CURENT_EXP" || stat == "NEXT_EXP" || stat == "RANK")
+					if(stat == "CURENT_LV")
 						input.value = files.readTiny(OFFSETS[offset][stat])
 					else
 						input.value = files.readShort(OFFSETS[offset][stat])
@@ -86,7 +86,7 @@ function save()
 			if(id.indexOf("-") > -1)
 			{
 				let [offset, stat] = id.split("-")
-				if(stat == "CURENT_LV" || stat == "CURENT_EXP" || stat == "NEXT_EXP" || stat == "RANK")
+				if(stat == "CURENT_LV")
 					files.writeTiny(OFFSETS[offset][stat], value)
 				else
 					files.writeShort(OFFSETS[offset][stat], value)
