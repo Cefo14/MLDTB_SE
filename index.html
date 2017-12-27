@@ -6,16 +6,97 @@
 	<meta name="description" content="A savegame editor for Mario & Luigi Dream Team."/>
 	<meta name="keywords" content="html5, savegame, save, editor, hack, exploit, 3ds, mario, luigi, dream team, free, exp"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet"> 
+	<style type="text/css">
+		body{
+			background-color: #272727;
+			font-family: 'Bungee', cursive;
+		}
+
+		input[type="number"]{
+			background-color: white;
+		}
+
+		img[class="img-fluid"]{
+			height: 100%;
+			width: 30%;
+		}
+
+		button:hover{
+			background-color:#ce2218;	
+		}
+
+		.input-group{
+			margin-bottom: 10px;
+		}
+
+		.border{
+			border-style: solid;
+			text-align: center;
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+
+		.mario-border{
+			border-color: #ce2218;
+		}
+
+		.luigi-border{
+			border-color: #2e9f3c;
+		}
+
+		.mario-text{
+			color: #d91818;
+		}
+
+		.luigi-text{
+			color: #279d3d;
+		}
+
+		.dropzone{
+			margin-bottom: 10px;
+			background-color: #43b0e2;
+		}
+
+		.float{
+			position:fixed;
+			width:60px;
+			height:60px;
+			bottom:10px;
+			right:20px;
+			background-color:#2e9f3c;
+			border-radius:50%;
+			text-align:center;
+		}
+
+		.hide{
+			display: hide;
+		}
+	</style>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/min/dropzone.min.js"></script>
 	<script type="text/javascript" src="./js/Files.js"></script>
 	<script type="text/javascript" src="./js/FileSaver.js"></script>
 	<script type="text/javascript" src="./js/SaveEditor.js"></script>
 	<script type="text/javascript" src="./js/App.js"></script>
 </head>
 	<body>
-		<center><h1>Save Editor</h1></center>
-		<input type="file" onchange="onChange(event)">
+		<center>
+			<img src="https://vignette.wikia.nocookie.net/nintendo/images/4/49/Mario_and_Luigi_-_Dream_Team_Logo.png/revision/latest/scale-to-width-down/640?cb=20130217204857&path-prefix=en" class="img-fluid">
+		</center>
+		
+		<header class="container">
+			<form action="/file-upload" class="dropzone" id="dropZone">
+			</form>
+		</header>
 
-		<div id="app"></div>
-		<button onclick="save()">Save</button>
+		<content>
+			<section id="app" class="container"></section>
+		</content>
+		
+		<button id="save" onclick="save()" class="float hide">
+			<span class="glyphicon glyphicon-save	" aria-hidden="true"></span>
+		</button>
 	</body>
 </html>
