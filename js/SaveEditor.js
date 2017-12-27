@@ -36,33 +36,38 @@ const OFFSETS = {
 }
 
 const RANKS = {
-	"shell" : {
+	"48" : {
 		lv: 7,
 		exp: [1220, 1290], // [0] = Mario [1] = Luigi 
-		next: 1
+		next: 1,
+		rank: "Shell"
 	},
 
-	"flower" : {
+	"49" : {
 		lv: 15,
 		exp: [9930, 10210], // [0] = Mario [1] = Luigi 
-		next: 1
+		next: 1,
+		rank: "Flower"
 	},
 
-	"star" : {
+	"50" : {
 		lv: 25,
 		exp: [49490, 50560], // [0] = Mario [1] = Luigi 
-		next: 1
+		next: 1,
+		rank: "Star"
 	},
 
-	"rainbow" : {
+	"51" : {
 		lv: 39,
 		exp: [231160, 233360], // [0] = Mario [1] = Luigi 
-		next: 1
+		next: 1,
+		rank: "Rainbow"
 	},
 
-	"final" : {
+	"52" : {
 		lv: 99,
 		exp: [3000000, 3002500], // [0] = Mario [1] = Luigi 
-		next: 1
+		next: 1,
+		rank: "Rainbow+"
 	}
 }

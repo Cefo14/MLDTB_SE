@@ -1,10 +1,31 @@
+'use strict'
+
 var files
 
-function onChange(event) 
-{
-	let file = event.target.files[0];
-	files = new Files(file)
+(function()
+{	
+	Dropzone.options.dropZone = {
+		init: function() 
+		{
+			this.on("addedfile", function(file) 
+			{ 
+				onChange(file)
+				this.removeFile(file)
+				document.getElementById("dropZone").style = "background-color: #2e9f3c";
+			})
+		},
 
+		dictDefaultMessage: "Drop or click to load the file (ML4_001.sav)"
+	}
+})()
+
+function onChange(file) 
+{
+	files = new Files(file)
+	
+	document.getElementById("app").innerHTML = ""
+	document.getElementById("save").classList.remove('hide');
+	
 	files.onLoadEnd(function()
 	{
 		let app = document.getElementById("app")
@@ -13,19 +34,30 @@ function onChange(event)
 		{
 			if(offset == "MARIO" || offset == "LUIGI")
 			{
-				let h2 = document.createElement("input").appendChild(document.createTextNode(offset))
-				app.appendChild(h2);
-				app.appendChild(document.createElement("hr")) // Provitional
+				let div = document.createElement("div")
+				div.className = "border " + (offset == "MARIO" ? "mario-border" : "luigi-border")
+
+				let h2 = document.createElement("h2")
+				h2.className = (offset == "MARIO" ? "mario-text" : "luigi-text")
+				h2.innerHTML = offset
+
+				div.appendChild(h2)
+				app.appendChild(div)
 				
 				for (let stat in OFFSETS[offset])
 				{
 					let id = offset.toLowerCase() + '-' + stat.toLowerCase()
 
-					let label = document.createElement("label")
-					label.appendChild(document.createTextNode(stat))
-					label.setAttribute("for", id)
+					let div = document.createElement("div")
+					div.className = "input-group"
+
+					let span = document.createElement("span")
+					span.className = "input-group-addon"
+					span.appendChild(document.createTextNode(stat))
+					span.setAttribute("for", id)
 
 					let input = document.createElement("input")
+					input.className = "form-control"
 					input.setAttribute("type", "number")
 					input.required = true
 					input.setAttribute("id", id)
@@ -35,11 +67,10 @@ function onChange(event)
 					else
 						input.value = files.readShort(OFFSETS[offset][stat])
 					
-					app.appendChild(label)
-					app.appendChild(input)
-					app.appendChild(document.createElement("br")) // Provitional
+					div.appendChild(span)
+					div.appendChild(input)
+					app.appendChild(div)
 				}
-				app.appendChild(document.createElement("hr")) // Provitional
 				continue;
 			}
 
@@ -50,19 +81,24 @@ function onChange(event)
 			{
 				let id = offset.toLowerCase()
 
-				let label = document.createElement("label")
-				label.appendChild(document.createTextNode(offset))
-				label.setAttribute("for", id)
+				let div = document.createElement("div")
+				div.className = "input-group"
+
+				let span = document.createElement("span")
+				span.className = "input-group-addon"
+				span.appendChild(document.createTextNode(offset))
+				span.setAttribute("for", id)
 
 				let input = document.createElement("input")
+				input.className = "form-control"
 				input.setAttribute("type", "number")
 				input.required = true
 				input.setAttribute("id", id)
 				input.value = files.readShort(OFFSETS[offset])
 				
-				app.appendChild(label)
-				app.appendChild(input)
-				app.appendChild(document.createElement("hr")) // Provitional
+				div.appendChild(span)
+				div.appendChild(input)
+				app.appendChild(div)
 			}
 		}
 	});
