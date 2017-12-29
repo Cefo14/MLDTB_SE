@@ -25,7 +25,40 @@ function onChange(file)
 	
 	document.getElementById("app").innerHTML = ""
 	document.getElementById("save").classList.remove('hide');
+
+	let div = document.createElement("div")
+	div.className = "input-group"
+
+	let span = document.createElement("span")
+	span.className = "input-group-addon"
+	span.appendChild(document.createTextNode("MAX_ITEMS"))
+	span.setAttribute("for", "MAX_ITEMS")
+	span.style = "color: black"
+
+	let input = document.createElement("input")
+	input.className = "form-control"
+	input.setAttribute("type", "button")
+	input.setAttribute("id", "MAX_ITEMS")
+	input.value =  "Click if you want the maximum number of items"
+	input.style = "background-color: #43b0e2; color: black;"
+
+	input.addEventListener("click", function()
+	{
+		let values = ["ITEMS", "BEANS", "BOOTS", "HAMMERS", "WEARS", "GLOVES", "AMULETS"]
+		values.forEach(function(value)
+		{
+			for(let item in OFFSETS[value])
+				files.writeTiny(OFFSETS[value][item], 244)
+		})
+
+		this.style = "background-color: #2e9f3c; color:black"
+		this.value = "You have all the items :D"
+	});
 	
+	div.appendChild(span)
+	div.appendChild(input)
+	document.getElementById("app").appendChild(div)
+
 	files.onLoadEnd(function()
 	{
 		let app = document.getElementById("app")

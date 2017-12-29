@@ -68,7 +68,7 @@ Files.prototype.writeShort = function(offset, value)
 	this._fileReader.dataView.setUint16(offset, value, this._littleEndian)
 }
 
-Files.prototype.writeInt = function(offset, b)
+Files.prototype.writeInt = function(offset, value)
 {
 	this._fileReader.dataView.setUint32(offset, value, this._littleEndian)
 }
