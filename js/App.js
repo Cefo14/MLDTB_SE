@@ -38,7 +38,7 @@ function onChange(file)
 	let input = document.createElement("input")
 	input.className = "form-control"
 	input.setAttribute("type", "button")
-	input.setAttribute("id", "MAX_ITEMS")
+	input.setAttribute("id", "max_items")
 	input.value =  "Click if you want the maximum number of items"
 	input.style = "background-color: #43b0e2; color: black;"
 
@@ -151,6 +151,9 @@ function save()
 			let input = inputs[x]
 			let id = input.getAttribute("id").toUpperCase()
 			let value = input.value
+
+			if(id == "MAX_ITEMS") 
+				continue
 
 			if(id.indexOf("-") > -1)
 			{
