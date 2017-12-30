@@ -11,11 +11,11 @@ var files
 			{ 
 				onChange(file)
 				this.removeFile(file)
-				document.getElementById("dropZone").style = "background-color: #2e9f3c";
+				document.getElementById("dropZone").classList.add("green-bg")
 			})
 		},
 
-		dictDefaultMessage: "Drop or click to load the file (ML4_001.sav)"
+		dictDefaultMessage: '<p>Drop or click to load the file (ML4_001.sav)</p><span class="glyphicon glyphicon-upload"></span>'
 	}
 })()
 
@@ -24,117 +24,51 @@ function onChange(file)
 	files = new Files(file)
 	
 	document.getElementById("app").innerHTML = ""
-	document.getElementById("save").classList.remove('hide');
-
-	let div = document.createElement("div")
-	div.className = "input-group"
-
-	let span = document.createElement("span")
-	span.className = "input-group-addon"
-	span.appendChild(document.createTextNode("MAX_ITEMS"))
-	span.setAttribute("for", "MAX_ITEMS")
-	span.style = "color: black"
-
-	let input = document.createElement("input")
-	input.className = "form-control"
-	input.setAttribute("type", "button")
-	input.setAttribute("id", "max_items")
-	input.value =  "Click if you want the maximum number of items"
-	input.style = "background-color: #43b0e2; color: black;"
-
-	input.addEventListener("click", function()
-	{
-		let values = ["ITEMS", "BEANS", "BOOTS", "HAMMERS", "WEARS", "GLOVES", "AMULETS"]
-		values.forEach(function(value)
-		{
-			for(let item in OFFSETS[value])
-				files.writeTiny(OFFSETS[value][item], 244)
-		})
-
-		this.style = "background-color: #2e9f3c; color:black"
-		this.value = "You have all the items :D"
-	});
-	
-	div.appendChild(span)
-	div.appendChild(input)
-	document.getElementById("app").appendChild(div)
+	document.getElementById("save").classList.remove('hide')
 
 	files.onLoadEnd(function()
 	{
 		let app = document.getElementById("app")
-		
-		for (let offset in OFFSETS)
-		{
-			if(offset == "MARIO" || offset == "LUIGI")
+
+		let event = {
+			type: "click",
+			action: function()
 			{
-				let div = document.createElement("div")
-				div.className = "border " + (offset == "MARIO" ? "mario-border" : "luigi-border")
-
-				let h2 = document.createElement("h2")
-				h2.className = (offset == "MARIO" ? "mario-text" : "luigi-text")
-				h2.innerHTML = offset
-
-				div.appendChild(h2)
-				app.appendChild(div)
-				
-				for (let stat in OFFSETS[offset])
+				let values = ["ITEMS", "BEANS", "BOOTS", "HAMMERS", "WEARS", "GLOVES", "AMULETS"]
+				values.forEach(function(value)
 				{
-					let id = offset.toLowerCase() + '-' + stat.toLowerCase()
+					for(let item in OFFSETS[value])
+						files.writeTiny(OFFSETS[value][item], 244)
+				})
 
-					let div = document.createElement("div")
-					div.className = "input-group"
-
-					let span = document.createElement("span")
-					span.className = "input-group-addon"
-					span.appendChild(document.createTextNode(stat))
-					span.setAttribute("for", id)
-
-					let input = document.createElement("input")
-					input.className = "form-control"
-					input.setAttribute("type", "number")
-					input.required = true
-					input.setAttribute("id", id)
-
-					if(stat == "CURENT_LV")
-						input.value = files.readTiny(OFFSETS[offset][stat])
-					else
-						input.value = files.readShort(OFFSETS[offset][stat])
-					
-					div.appendChild(span)
-					div.appendChild(input)
-					app.appendChild(div)
-				}
-				continue;
-			}
-
-			else if(offset == "ITEMS")
-				break
-
-			else
-			{
-				let id = offset.toLowerCase()
-
-				let div = document.createElement("div")
-				div.className = "input-group"
-
-				let span = document.createElement("span")
-				span.className = "input-group-addon"
-				span.appendChild(document.createTextNode(offset))
-				span.setAttribute("for", id)
-
-				let input = document.createElement("input")
-				input.className = "form-control"
-				input.setAttribute("type", "number")
-				input.required = true
-				input.setAttribute("id", id)
-				input.value = files.readShort(OFFSETS[offset])
-				
-				div.appendChild(span)
-				div.appendChild(input)
-				app.appendChild(div)
+				this.classList.remove("blue-bg")
+				this.classList.add("green-bg")
+				this.classList.add("black-text")
+				this.value = "You have all the items :D"
 			}
 		}
-	});
+	
+		app.appendChild(makeBox("ITEMS & MONEY"))
+		app.appendChild(makeInput("money", files.readShort(OFFSETS["MONEY"]), "MONEY"))
+		app.appendChild(makeInput("max_items", "Click if you want the maximum number of items", "MAX_ITEMS", "button", event))
+
+		let PJ = ["MARIO", "LUIGI"]
+		PJ.forEach(function(offset)
+		{
+			app.appendChild(makeBox(offset, [offset.toLowerCase()]))
+			for (let stat in OFFSETS[offset])
+			{
+				let id = offset.toLowerCase() + '-' + stat.toLowerCase()
+				let value
+				if(stat == "CURENT_LV")
+					value = files.readTiny(OFFSETS[offset][stat])
+				else
+					value = files.readShort(OFFSETS[offset][stat])
+				
+				app.appendChild(makeInput(id, value, stat))
+			}
+		})
+	})
 }
 
 function save() 
@@ -172,6 +106,43 @@ function save()
 	}
 
 	else
-		throw "App.js: files is not load";
+		throw "App.js: files is not load"
 		
+}
+
+function makeBox(title, classes)
+{
+	let div = document.createElement('div')
+	div.className = 'box black-text '  + (classes ? classes.join(' ') : '')
+	let h2 = document.createElement('h2')
+	h2.innerHTML = title
+	div.appendChild(h2)
+	return div
+}
+
+function makeInput(id, value, text, type, event)
+{
+	let div = document.createElement("div")
+	div.className = "input-group"
+
+	let span = document.createElement("span")
+	span.className = "input-group-addon black-text border"
+	span.appendChild(document.createTextNode(text))
+	span.setAttribute("for", id)
+
+	let input = document.createElement("input")
+	input.className = "form-control black-text border"
+	input.setAttribute("type", type || "number")
+	input.setAttribute("id", id)
+	input.value = value
+
+	if(event)
+	{
+		input.addEventListener(event.type, event.action)
+	}
+
+	div.appendChild(span)
+	div.appendChild(input)
+
+	return div
 }
