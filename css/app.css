@@ -1,0 +1,81 @@
+body{
+	font-family: 'Bungee', cursive;
+	background-image: url("https://img00.deviantart.net/d0e0/i/2013/155/4/2/mario_and_luigi__dream_team___the_year_of_luigi_by_legend_tony980-d67v7jq.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
+
+.border{
+	border-style: solid;
+	border-color: black;
+	color: black;
+	opacity: 0.8;
+}
+
+.head-img{
+	height: 100%;
+	width: 30%;
+}
+
+.dropzone{
+	border-style: dashed;
+	border-color: black;
+	border-width: 4px;
+	color: black;
+	font-size: 1.5em;
+	margin-bottom: 12px;
+	background-color: #43b0e2;
+}
+
+.box{
+	border-style: solid;
+	text-align: center;
+	background-color: #43b0e2;
+	border-color: #43b0e2;
+}
+
+.mario{
+	background-color: #d91818;
+	border-color: #ce2218;
+}
+
+.luigi{
+	background-color: #279d3d;
+	border-color: #2e9f3c;
+}
+
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:10px;
+	right:20px;
+	border-radius:50%;
+	text-align:center;
+}
+
+.float:hover{
+	background-color:#ce2218;	
+}
+
+.hide{
+	display: hide;
+}
+
+.black-text{
+	color: black;
+}
+
+.green-bg{
+	background-color: #2e9f3c;
+}
+
+.blue-bg{
+	background-color: #43b0e2;
+}
+
+.separator{
+	margin-bottom: 10px;
+}
