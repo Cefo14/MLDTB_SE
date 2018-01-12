@@ -1,6 +1,13 @@
-# MLDT_SE
-This is a save editor for the game Mario &amp; Luigi Dream Team 3DS make in Javascript
+# Mario and Luigi:copyright: Dream Team Save Editor
 
+This is a Web Version of the save editor for the game Mario &amp; Luigi Dream Team nintendo:copyright: 3DS in Javascript.
+
+Fly over:
 https://cefo14.github.io/MLDT_SE/
 
-you can try the code with the save file in the saveData folder
+Load your `*.sav` file
+
+Watch all of your stats!
+
+# Where to get the `.*sav` file?
+On the saveData folder.
